@@ -1,8 +1,5 @@
-#include <iostream>
 #include <iomanip>
 #include <random>
-#include <cmath>
-#include <ctime>
 #include "matrix.h"
 using namespace std;
 

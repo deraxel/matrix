@@ -1,41 +1,19 @@
-#include <iostream>
-#include <iomanip>
-#include <random>
-#include <cmath>
-#include <ctime>
-#include <fstream>
-#include <sstream>
-#include <vector>
 using namespace std;
 #include "gauseelim.h"
 
 GauseElim::GauseElim(){
 	n=0;
-	fileText="";
 };
 
 GauseElim::~GauseElim(){
 };
 
-GauseElim::GauseElim(string file){
-	listOfMatrix.open(file);
-	fileText="";
-	char tempC;
-	while(listOfMatrix.get(tempC)){
-		fileText.append(1,tempC);
-	}
-	setGause();
-};
-
-void GauseElim::setFileString(string x){
-	fileText=x;
-}
-
-void GauseElim::setGause(){
-	setN();
-	setGause1();
+GauseElim::GauseElim(int x, Mat ma1, Mat ma2){
+	first=ma1;
+	solve=ma2;
+	n=x;
 	setGause2();
-	setSolveGause();
+	calcGause();
 };
 
 void GauseElim::calcGause(){
@@ -53,68 +31,25 @@ void GauseElim::displayAll(){
 	display();
 	displayAnswer();
 };
-
-string GauseElim::getToken(int n){
-	int things=0;
-	for(int i=0;i<=fileText.length();i++){
-		if(((char)fileText[i])=='\n'){
-			things++;
-		}
-	}
-	string token[things];
-	int temp=0;
-	for(int i=0;i<things;i++){
-		temp=0;
-		token[i]="";
-		for(int i2=0;i2<i;i2++){//counts returns and sets reader at start of newline
-			while(fileText[temp]!='\n'){
-				temp++;
-			}
-			temp++;
-		}
-		while(fileText[temp]!='\n'){
-			token[i].append(1,fileText[temp]);
-			temp++;
-		}
-	}
-	return token[n];
-}
-								//  01234567  length is 8
-int GauseElim::stringToInt(string tok, int location){//stringToInt("20 30 40",1) get 30 
-	int temp=0;
-	int i=0;
-	int tens=0;
-	int output=0;
-	while(i<tok.length()and temp<location){
-		if(tok[i]==' '){
-			temp++;
-		}
-		i++;
-	}
-	while(tok[i]!=' ' and tok[i]){
-		output=output*tens;
-		output=(tok[i]-'0')+output;
-		tens=10+tens;
-		i++;
-	}
-	return output;	
-}
-
-void GauseElim::setN(){
-	n=stringToInt(getToken(0),0);
+							
+void GauseElim::setN(int x){
+	n=x;
 };
 
 int GauseElim::getN(){
 	return n;
 };
 
-void GauseElim::setGause1(){
-	first.makeMatrix(getN(), getN());
-	for(int i1=1;i1<n+1;i1++){
-		for(int i2=0;i2<n;i2++){
-			first.setNode(i1-1,i2,double(stringToInt(getToken(i1),i2)));
-		}
-	}
+Mat GauseElim::getFirst(){
+	return first;
+};
+
+Mat GauseElim::getSecond(){
+	return second;
+};
+
+Mat GauseElim::getSolve(){
+	return solve;
 };
 
 void GauseElim::setGause2(){
@@ -132,14 +67,6 @@ void GauseElim::solveForSecond(){
 		temp1=(temp.getNode(i,getN())-temp2)/temp.getNode(i,i);
 		second.setNode(i,0,temp1);
 	}
-};
-
-void GauseElim::setSolveGause(){
-	solve.makeMatrix(getN(),1);
-	for(int i1=n+1;i1<(2*n)+1;i1++){
-		solve.setNode((i1-n-1),0,double(stringToInt(getToken(i1),0)));
-	}
-	cout<<endl;
 };
 
 void GauseElim::display(){
@@ -179,21 +106,3 @@ void GauseElim::gausingElemination(){
 		}
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

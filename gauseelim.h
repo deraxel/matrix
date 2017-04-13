@@ -2,7 +2,6 @@
 #define gauseelim_h
 using namespace std;
 #include "matrix.h"
-#include <fstream>
 class GauseElim
 {
 	private:
@@ -11,21 +10,17 @@ class GauseElim
 		Mat solve;
 		Mat temp;
 		int n;
-		ifstream listOfMatrix;
-		string fileText;
 	protected:
 	public:
 		GauseElim();
 		~GauseElim();
-		GauseElim(string);
-		void setGause();
-		void setGause1();
+		GauseElim(int, Mat, Mat);
 		void setGause2();
-		void setSolveGause();
-		void setN();
+		void setN(int);
 		int getN();
-		string getToken(int);
-		int stringToInt(string,int);
+		Mat getFirst();
+		Mat getSecond();
+		Mat getSolve();
 		void display();
 		void setGauseTemp();
 		void gausingElemination();
@@ -33,7 +28,5 @@ class GauseElim
 		void displayAll();
 		void displayAnswer();
 		void calcGause();
-		void setFileString(string);
 };
-
 #endif

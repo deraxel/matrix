@@ -1,11 +1,9 @@
 This program requires the user to add the file *.txt to be added to the execution of the file, matrix.exe
-Currently this program only handles inputs of whole integers
-The text file must follow the following format:  an integer representing the number of rows and columns in the first matrix, a carriage return, a matrix divided columns by a single space and a carriage return dividing the rows. the next matrix is divided by a single carriage return.  This consists of a single integer followed by a carriage return.  This should have the number of rows equal to the first integer in the file.
-x
-11 1. 1x   
-.1 .. .x  (. represents every number between 1 and x)
-x1 x. xx
-11
-.1
-x1
+The text file must follow the following format:  a number representing the number of Ix rows and Iy columns in the first matrix, a carriage return, a matrix divided rows by a single space and a carriage return dividing the col. Two data files are required to use gauseelim (which calculates gausing elimination) and LUcalc(which calculates LU decomposition and does gausing elimination to calculate an answer)
+Ix Iy
+11 1. 1Ix   
+.1 .. .Ix  (. represents every number between 1 and x)
+Iy1 Iy. IyIx
+
+
 
